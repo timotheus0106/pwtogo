@@ -1,0 +1,56 @@
+// ----------------------------------------------------------------
+// HELPER
+// ----------------------------------------------------------------
+
+.fr { float: right !important; }
+.fl { float: left !important; }
+.fn { float: none !important; }
+
+.tal { text-align: left !important; }
+.tar { text-align: right !important; }
+.tac { text-align: center !important; }
+
+.ttu { text-transform: uppercase !important; }
+.ttl { text-transform: lowercase !important; }
+
+.db { display: block !important; }
+.dib { display: inline-block !important; }
+
+.posrel	{ position: relative !important; }
+.posabs { position: absolute !important; }
+
+.o0 { opacity: 0 !important; }
+.o1 { opacity: 1 !important; }
+
+.vh { visibility: hidden !important; }
+.vv { visibility: visible !important; }
+
+.boxb { box-sizing: border-box !important; }
+.boxc { box-sizing: content-box !important; }
+
+// ----------------------------------------------------------------
+
+.willChange { transform: translate3d(0, 0, 0) !important; }
+
+@mixin visuallyhidden {
+	border: 0 !important;
+	clip: rect(0 0 0 0) !important;
+	height: 1px !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	position: absolute !important;
+	width: 1px !important;
+}
+.hide {
+	@include visuallyhidden;
+}
+
+// ----------------------------------------------------------------
+
+%fontSmoothing {
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+}

@@ -1,0 +1,21 @@
+# Wordpress Media Files
+/Content/uploads
+
+# Mac Files
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Win Files
+ehthumbs.db
+Thumbs.db
+
+# PHPStorm
+/.idea
+
+# GRUNT
+/npm-debug.log
+/node_modules
+
+/Assets/Scss/.sass-cache

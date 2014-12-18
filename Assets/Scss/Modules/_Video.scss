@@ -1,0 +1,23 @@
+.video {
+
+	height: auto;
+	width: 100%;
+
+}
+
+video {
+
+	.ios & { // nasty bug in ios
+
+		min-height: 100%;
+		min-width: 100%;
+		height: auto !important;
+		width: auto !important;
+
+	}
+
+	&:focus {
+		outline: none; // video gets focus when playing & stops when losing focus!
+	}
+
+}

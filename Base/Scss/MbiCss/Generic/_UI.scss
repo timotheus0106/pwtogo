@@ -1,0 +1,22 @@
+// ----------------------------------------------------------------
+// USER INTERACTION (e.g. click handling of buttons etc.)
+// ----------------------------------------------------------------
+
+%ui--standard { // non selectable element
+	user-select: none;
+	cursor: default;
+}
+
+%ui--button { // non selectable element with pointer
+	user-select: none;
+	cursor: pointer !important;
+}
+
+%ui--text { // force element to be selectable (inside non-selectable)
+	user-select: text !important;
+	cursor: text !important;
+}
+
+%ui--pass { // let pointer events pass through (ie11+)
+	pointer-events: none;
+}

@@ -1,0 +1,13 @@
+// ---------------------------------------------------------------------
+// CLEARFIX
+//
+// css-101.org/articles/clearfix/latest-new-clearfix-so-far.php
+// ---------------------------------------------------------------------
+%cf,
+.cf {
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}

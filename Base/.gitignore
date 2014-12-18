@@ -1,0 +1,14 @@
+/Refactor
+
+# Mac Files
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Win Files
+ehthumbs.db
+Thumbs.db
+
+# PHPStorm
+/.idea

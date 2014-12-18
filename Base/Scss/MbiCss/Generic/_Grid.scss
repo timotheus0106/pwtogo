@@ -1,0 +1,79 @@
+/**
+ * .grid
+ *
+ * always needs a width (at least (1/1))
+ */
+.grid {
+
+	float: left;
+	overflow: hidden;
+
+	&--center {
+
+		margin-left: auto;
+		margin-right: auto;
+
+		float: none;
+
+	}
+
+}
+	/**
+	 * .grid__item
+	 *
+	 * always needs a width (at least (1/1))
+	 * If aspect-ratio is to be applied to grid__item, it must have an inner wrapper to assign the ratio to! Otherwise the grid will fail!
+	 */
+	.grid__item {
+
+		float: left;
+		font-size: 1em;
+
+		// .flexbox & {
+		// 	align-items: stretch;
+		// }
+		// .no-flexbox & {
+		// 	margin-bottom: em(-10000px);
+		// 	padding-bottom: em(10000px);
+		// }
+
+		&--center {
+
+			margin-left: auto;
+			margin-right: auto;
+
+			float: none;
+
+		}
+
+		&--row {
+
+			@extend %cf;
+
+			// .flexbox & {
+			// 	display: flex;
+			// 	flex-wrap: wrap;
+			// }
+			// .no-flexbox & {
+			// 	overflow: hidden;
+			// }
+
+		}
+
+		// .grid--debug & {
+
+		// 	$count: 12;
+
+		// 	@for $i from 1 through $count {
+		// 		$color: darksalmon;
+		// 		/*
+		// 		@if $i % 2 == 0 {
+		// 			$color: darkseagreen;
+		// 		}
+		// 		*/
+		// 		&:nth-of-type(#{$i}) { background-color: lighten($color, $i * 3%); }
+		// 	}
+
+		// }
+
+	}

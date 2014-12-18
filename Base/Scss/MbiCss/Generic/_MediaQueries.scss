@@ -1,0 +1,77 @@
+// ---------------------------------------------------------------------
+// MEDIA QUERIES
+// ---------------------------------------------------------------------
+
+$mapMediaQueries: (
+
+	palm: 	(0px, 		479px),
+	lap: 	(480px, 	767px),
+	desk: 	(768px, 	1023px),
+	wide:	(1024px, 	9999px)
+
+) !default; // fallback if nothing isset before
+
+@mixin mq($media-query) {
+
+	@each $key, $val in $mapMediaQueries {
+
+		@if $key == $media-query { // only
+			@if nth($val, 1) > 0{
+				@media only screen and (min-width: nth($val, 1)) and (max-width:nth($val, 2)) { @content; }
+			} @else {
+				@media only screen and (max-width: nth($val, 2)) { @content; }
+			}
+		} @else if $media-query == "#{$key}+" { // -and-up
+			@if nth($val, 1) > 0{
+				@media only screen and (min-width: nth($val, 1)) { @content; }
+			}
+		} @else if $media-query == "#{$key}-" { // -and-down
+			@if nth($val, 1) > 0{
+				@media only screen and (max-width: nth($val, 2)) { @content; }
+			}
+		}
+
+	}
+
+}
+
+// ---------------------------------------------------------------------
+// HIDE-ON-MQ
+// ---------------------------------------------------------------------
+
+@each $key, $val in $mapMediaQueries {
+
+	[class~="-#{$key}"] 	{ @include mq("#{$key}") 	{ display: none !important; } }
+	[class~="-#{$key}+"] 	{ @include mq("#{$key}+") 	{ display: none !important; } }
+	[class~="-#{$key}-"] 	{ @include mq("#{$key}-") 	{ display: none !important; } }
+
+}
+
+// ---------------------------------------------------------------------
+// MQ INDICATOR
+// ---------------------------------------------------------------------
+
+.mqIndicator {
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+
+	padding: em($spaceHalf);
+
+	font-size: em(12px);
+
+	background-color: rgba(0,0,0,0.5);
+	color: white;
+
+	z-index: 9999;
+
+	@each $key, $val in $mapMediaQueries {
+		@include mq(#{$key}) {
+			&:after { content: "#{$key}"; float: left; }
+			&:before { content: "from #{nth($val, 1)} to #{nth($val, 2)}"; float: right; }
+		}
+	}
+
+}

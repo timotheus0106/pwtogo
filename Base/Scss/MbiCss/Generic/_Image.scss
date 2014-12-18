@@ -1,0 +1,92 @@
+// ----------------------------------------------------------------
+// IMAGE
+// ----------------------------------------------------------------
+
+// use image parent to set image container (for posrel, oh)
+.image\:parent {
+
+	position: relative;
+	overflow: hidden;
+
+}
+	// e.g. ".image--fillHeight"
+	.image {
+
+		display: block;
+
+		&--fill {
+
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%,-50%);
+
+			&Height {
+				@extend .image--fill;
+				height: 100%;
+			}
+
+			&Width {
+				@extend .image--fill;
+				width: 100%;
+			}
+
+		}
+
+		&--stretch {
+
+			&Height {
+				width: auto;
+				height: 100%;
+			}
+
+			&Width {
+				width: 100%;
+				height: auto;
+			}
+
+		}
+
+		&--fit {
+
+			position: absolute;
+
+			margin: auto;
+
+			// to enlarge them images when smaller than container (which should have class="image:parent")
+			top: -500%;
+			bottom: -500%;
+			left: -500%;
+			right: -500%;
+
+			&Height {
+				@extend .image--fit;
+				height: 100%;
+
+			}
+			&Width {
+				@extend .image--fit;
+				width: 100%;
+			}
+
+		}
+
+	}
+
+.background {
+
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+
+	&--fullscreen {
+
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+
+	}
+
+}

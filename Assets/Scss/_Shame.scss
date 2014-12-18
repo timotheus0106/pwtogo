@@ -1,0 +1,119 @@
+// ----------------------------------------------------------------
+// DELETE THIS ON START, NOT NEEDED
+// ----------------------------------------------------------------
+
+body {
+	font-size: 1em;
+	line-height: 1.4em;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+.site {
+	width: 960px;
+	margin: 0 auto;
+}
+
+
+// ----------------------------------------------------------------
+// Temporary Styles for domain.com/Assets/index.php
+// ----------------------------------------------------------------
+
+.grid {
+
+	padding-bottom: 2em;
+
+}
+
+.module {
+
+	margin-top: 6em;
+	padding-top: 2em;
+	border-top: 1px dashed #ccc;
+
+}
+
+.title {
+
+	font-size: 2em;
+	padding: 1em;
+	width: 100%;
+	text-align: center;
+
+}
+
+.product {
+
+	height: 15em;
+
+	background: #ddd;
+
+	position: relative;
+
+	.product__wrapper {
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: yellow;
+
+		.title {
+
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+
+		}
+
+	}
+
+}
+
+.is_testA {
+
+	border: 2px solid magenta;
+
+}
+.is_testB {
+
+	background-color: cyan;
+
+}
+
+.button--text {
+
+	padding: 1em;
+	background: #333;
+	color: white;
+	display: inline-block;
+
+	&.is_active {
+		color: yellow;
+	}
+
+}
+
+.navigation {
+
+	padding: 1em;
+
+	.button {
+
+		@extend %ui--button;
+
+		position: absolute;
+		top: 0;
+		left: 100%;
+		padding: 1em;
+
+	}
+
+}
+
+.module--video {
+	.no-video & {
+		display: none;
+	}
+}

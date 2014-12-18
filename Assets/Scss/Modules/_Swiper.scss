@@ -1,0 +1,96 @@
+.module--swiper {
+
+	width: 100%;
+
+	position: relative;
+
+	.module__container {
+		// height: 100vh;
+		height: 20em;
+		position: relative;
+	}
+
+}
+
+.swiper {
+	z-index: 1;
+
+	background: #ddd;
+
+}
+	.swiper__wrapper {}
+		.swiper__slide {
+			position: relative;
+		}
+			.slide__container {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				text-align: center;
+				width: 100%;
+			}
+
+.control {} // if control for other elements use .control
+.control--swiper {
+
+	@extend %ui--standard;
+
+	z-index: 2;
+
+	position: absolute;
+	bottom: 1em;
+	left: 50%;
+	transform: translate(-50%,0);
+
+	.control__button {
+		@extend %ui--button;
+		display: inline-block;
+	}
+	.control__counter {
+		display: inline-block;
+	}
+		.control__current {}
+		.control__total {}
+
+}
+
+.pagination {}  // if pagination for other elements use .pagination
+.pagination--swiper {
+
+	@extend %ui--standard;
+
+	z-index: 2;
+
+	position: absolute;
+	top: 1em;
+	left: 50%;
+	transform: translate(-50%,0);
+
+	$paginationSize: $baseFontSize !default;
+
+	.pagination__switch {
+
+		@extend %ui--button;
+
+		width: em($paginationSize);
+		height: em($paginationSize);
+
+		display: inline-block;
+
+		padding: em($paginationSize*0.5);
+		margin: em($paginationSize*0.25);
+
+		background-color: lighten($colorDark, 50%);
+		border-radius: 100%;
+
+		transition: background-color 200ms ease-in-out;
+
+		&--active,
+		&--visible {
+			background-color: $colorDark;
+		}
+
+	}
+
+}

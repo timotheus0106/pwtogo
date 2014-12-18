@@ -1,0 +1,24 @@
+/**
+ * ------------------------------------------------------------
+ * mbiCSS
+ * {{VERSION}}
+ * -----------------------------------------------------------
+ */
+
+@mixin backgroundSize($arg) {
+
+	background-size: $arg;
+	image-rendering: optimizeQuality;
+
+}
+
+@mixin aspectRatio($ratio, $width, $force: null) {
+
+	@if $force == true {
+		$force: !important;
+	}
+
+	padding-bottom: $width/$ratio $force;
+	width: $width $force;
+
+}

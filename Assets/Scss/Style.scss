@@ -1,0 +1,38 @@
+// ----------------------------------------------------------------
+// SETTINGS + BASE
+// ----------------------------------------------------------------
+
+// FETCHES DATA FROM CONFIG (e.g. MediaQueries)
+@import "../Config/Config.json";
+
+// PROJECT VARIABLES (e.g. colors, metrics), also overwrites settings for mbiCSS (mbiCSS/_mbiDefaults.scss)
+@import "Vars";
+
+@import "../../Base/Scss/MbiCss/Mbi"; // fetch MbiCSS helper (do not alter them!)
+
+// ----------------------------------------------------------------
+// MODULES (FROM BASE, DO NOT MODIFY!)
+// ----------------------------------------------------------------
+@import "../../Base/Scss/Vendor/Swiper";
+
+// ----------------------------------------------------------------
+// PROJECT STYLES (MODIFY THEM)
+// ----------------------------------------------------------------
+
+@import "Fonts"; // Fonts
+@import "Base"; // General settings
+@import "Svg"; // SVG graphic styles
+@import "UI"; // User Interaction styles
+
+// ----------------------------------------------------------------
+// PROJECT MODULES (MODIFY THEM)
+// ----------------------------------------------------------------
+@import "Modules/Modal";
+@import "Modules/Navigation";
+@import "Modules/Swiper";
+@import "Modules/Video";
+
+// ----------------------------------------------------------------
+// SHAME
+// ----------------------------------------------------------------
+@import "Shame"; // (Temporarily) test styles here

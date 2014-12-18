@@ -1,0 +1,56 @@
+// ----------------------------------------------------------------
+// TOGGLE/HOVER CLASSES (used by js)
+// ----------------------------------------------------------------
+
+.button {
+
+	@extend %ui--button;
+
+}
+
+.is_locked {
+
+	pointer-events: none;
+	opacity: 0.5;
+
+}
+.is_active {}
+
+.js_hover {
+
+	@extend %ui--button;
+
+	.hover__container {
+		pointer-events: none;
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	&.is_active {
+
+		.hover__container {
+			pointer-events: auto;
+			opacity: 1;
+			visibility: visible;
+		}
+
+	}
+
+}
+
+.indicator {}
+.indicator--touch {
+
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+
+	display: block;
+
+	pointer-events: none;
+
+	.is_active & {
+		display: none;
+	}
+
+}

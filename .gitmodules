@@ -1,0 +1,6 @@
+[submodule "Base"]
+	path = Base
+	url = git@github.com:moodley/Base.git
+[submodule "WordPress"]
+	path = WordPress
+	url = https://github.com/WordPress/WordPress.git

@@ -1,0 +1,69 @@
+$transitionModal: 250ms ease-in-out !default;
+$spaceFull: 1em !default; // part of mbiCSS
+
+.modal {
+
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	overflow: hidden;
+
+	backface-visibility: hidden;
+
+	text-align: center;
+
+	background: rgba(white,0.9);
+
+	opacity: 0;
+	z-index: -1;
+	visibility: hidden;
+
+	transition: opacity $transitionModal, visibility $transitionModal, z-index $transitionModal;
+
+}
+
+.modal__wrapper {
+
+	position: absolute;
+
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+}
+
+.modal--show {
+
+	opacity: 1;
+	visibility: visible;
+
+	z-index: 100;
+
+	// display: block;
+
+}
+
+.modal__close {
+
+	position: absolute;
+
+	width: $spaceFull * 2;
+	height: $spaceFull * 2;
+
+	right: $spaceFull;
+	top: $spaceFull;
+
+	z-index: 101;
+
+}
+
+.has_modal {
+
+	overflow: hidden;
+
+}

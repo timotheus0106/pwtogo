@@ -1,0 +1,25 @@
+{
+	"name": "WpTemplate",
+	"version": "1.0.0",
+	"devDependencies": {
+		"grunt": "~0.4.5",
+		"glob": "~4.0.6",
+		"load-grunt-tasks": "~0.2.1",
+		"grunt-newer": "~0.7.0",
+		"grunt-contrib-watch": "~0.6.1",
+		"grunt-contrib-sass": "~0.8.1",
+		"grunt-autoprefixer": "~1.0.1",
+		"grunt-contrib-requirejs": "~0.4.4",
+		"grunt-contrib-uglify": "~0.6.0",
+		"grunt-combine-media-queries": "~1.0.19",
+		"grunt-file-creator": "^0.1.2",
+		"grunt-contrib-cssmin": "~0.10.0"
+	},
+	"sourceScss": "./Assets/Scss/",
+	"sourceScssBase": "./Base/Scss/",
+	"sourceScript": "./Assets/Js/",
+	"sourceScriptBase": "./Base/Js/",
+	"destinationCss": "./Assets/Css/",
+	"destinationJs": "./Assets/BuildJs/",
+	"configLocation": "./Assets/Config/"
+}

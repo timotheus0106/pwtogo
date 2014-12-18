@@ -1,0 +1,35 @@
+$transitionNavigation: 250ms ease-in-out !default;
+$widthNavigation: 200px !default;
+
+.site {
+
+	z-index: 1;
+
+	width: 100%;
+
+}
+.navigation {
+
+	@extend .willChange;
+
+	z-index: 10;
+
+	position: fixed;
+
+	top: 0;
+	bottom: 0;
+
+	width: em($widthNavigation);
+
+	background: yellow;
+
+	left: em(-$widthNavigation);
+	transition: left $transitionNavigation;
+
+	.has_navigation--open & {
+
+		left: 0;
+
+	}
+
+}

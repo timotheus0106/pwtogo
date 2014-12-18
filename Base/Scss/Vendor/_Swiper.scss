@@ -1,0 +1,55 @@
+.swiper-container,
+.swiper {
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+	backface-visibility: hidden;
+	/* Fix of Webkit flickering */
+	z-index: 1;
+}
+
+.swiper-wrapper,
+.swiper__wrapper {
+
+	position: relative;
+	width: 100%;
+	height: 100%;
+	transition-property: transform, left, top;
+	transition-duration: 0s;
+	transform: translate3d(0px, 0, 0);
+	transition-timing-function: ease;
+
+	box-sizing: content-box;
+}
+
+.swiper--freeMode > .swiper-wrapper,
+.swiper-free-mode > .swiper__wrapper {
+
+	transition-timing-function: ease-out;
+	margin: 0 auto;
+}
+
+.swiper-slide,
+.swiper__slide {
+	width: 100%;
+	height: 100%;
+	float: left;
+	position: relative;
+}
+
+.swiper-free-mode .swiper-slide,
+.swiper-freeMode .swiper__slide {
+	height: auto;
+}
+
+.swiper-wp8-horizontal,
+.swiper--wp8Horizontal {
+	-ms-touch-action: pan-y;
+}
+
+.swiper-wp8-vertical,
+.swiper--wp8Vertical {
+	-ms-touch-action: pan-x;
+}
