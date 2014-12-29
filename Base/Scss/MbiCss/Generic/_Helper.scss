@@ -28,6 +28,9 @@
 .boxb { box-sizing: border-box !important; }
 .boxc { box-sizing: content-box !important; }
 
+.oh { overflow: hidden !important; }
+.oa { overflow: auto !important; }
+
 // ----------------------------------------------------------------
 
 .willChange { transform: translate3d(0, 0, 0) !important; }
