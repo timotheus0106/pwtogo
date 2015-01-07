@@ -4,20 +4,21 @@ require([
 	'base/MbiMediaQuery',
 	'base/MbiHelper',
 
+	'project/Helper',
 	'base/footer',
 	'base/MbiModal',
 	'base/MbiImageSize',
-	'base/MbiBackgroundImage',
+	'base/MbiBackgroundImage'
 
-	'project/Video',
-	'project/HoverHandler',
-	'project/ToggleHandler',
-	'project/MenuToggleHandler'
+	// 'project/HoverHandler',
+	// 'project/ToggleHandler',
+	// 'project/MenuToggleHandler'
 ], function(
 	$,
 	mbiConfig,
 	mbiMq,
-	_
+	_,
+	Ajaxx
 ) {
 	'use strict';
 
@@ -33,87 +34,144 @@ require([
 	}
 
 	// ----------------------------------------------------------------
-	// SWIPER SETUP
+	// CHECK LOGIN
 	// ----------------------------------------------------------------
-	if(_.exists('.swiper')) {
-		require(['base/MbiSwiper'], function(mbiSwiper) {
+	var userId = '';
 
-			$('.swiper').each(function() {
+	function checkLogin(){
 
-				var id = $(this).attr('id'), // create swiper with id assigned to container
-					data = $('#'+id).data(),
+		$('#checkLogin').submit(function(e){
+			e.preventDefault();
 
-					args = {
+			var form = $("#checkLogin").serializeArray();
+			$('.errorMsg').remove();
 
-						roundLengths: 		true,
-						resizeFix: 			true,
-						grabCursor: 		true,
+			_.ajax('checklogin', {
 
-						// @todo: move wrapper names into base ?
+		        form: form
 
-						wrapperClass: 		'swiper__wrapper',
-						slideClass: 		'swiper__slide',
-						slideActiveClass: 	'swiper__slide--active',
-						slideVisibleClass: 	'swiper__slide--visible',
-						noSwipingClass: 	'swiper--noSwiping',
+		    }, function(data) {
 
-					},
-					/**
-					 * set different swiper options
-					 * use values from mbiMq.mq
-					 */
-					states = {
+		        if(data.success === true) {
+		            location.href = data.pageUrl;
+		        } else {
+		            $('.submit').prepend(data.content);
 
-						'palm': {
-							slidesPerView: 1
-						},
-						'lap+': {
-							slidesPerView: 3
-						}
+		            $('.errorMsg').fadeOut(4000, function() {
+			            $('.errorMsg').remove();
+			        });
+		        }
+		    });    
+		});
+	}
 
-					};
+	// ----------------------------------------------------------------
+	// OPEN PORTAL CLICK
+	// ----------------------------------------------------------------
 
-				// @todo: move value check into swiper module ?
+	function openPortalInfo(){
+		$('.portal--item').click(function(){
 
-				if('loop' in data) {
-					if(data.loop === true) {
-						args.loop = true;
-					}
-				}
+			if ($(this).hasClass('open')) {
 
-				if('autoplay' in data) {
-					if(data.autoplay === true) {
-						args.autoplay = 6000;
-					} else if(data.autoplay === parseInt(data.autoplay, 10)) { // if is integer
-						args.autoplay = data.autoplay;
-					}
-				}
+				// $(this).css('max-height', piHeight);
+				$(this).removeAttr('style');
+				$(this).removeClass('open');
 
-				if('initCounter' in data) {
-					args.initCounter = data.initCounter;
-					args.loop = false; // counter + loop does not work (yet)
-				}
+			} else {
+				var $poratlInfo = $(this).children('.portalInfos');
+				var piHeight = $poratlInfo.outerHeight() + 50;
 
-				if('initButtons' in data) {
-					args.initButtons = data.initButtons;
-				}
-
-				if('initPagination' in data) {
-					args.initPagination = data.initPagination;
-				}
-
-				// INIT SWIPER WITH ARGUMENTS
-				var options = { base: args };
-				if(!_.exists($(this).parents('.modal'))) { // e.g. if within modal omit states
-					options.states = states;
-				}
-
-				mbiSwiper.createSwiper(id, options);
-
-			});
+				$(this).css('max-height', piHeight);
+				$(this).addClass('open');
+				
+			}
 
 		});
 	}
+
+	// ----------------------------------------------------------------
+	// SWIPER SETUP
+	// ----------------------------------------------------------------
+	// if(_.exists('.swiper')) {
+	// 	require(['base/MbiSwiper'], function(mbiSwiper) {
+
+	// 		$('.swiper').each(function() {
+
+	// 			var id = $(this).attr('id'), // create swiper with id assigned to container
+	// 				data = $('#'+id).data(),
+
+	// 				args = {
+
+	// 					roundLengths: 		true,
+	// 					resizeFix: 			true,
+	// 					grabCursor: 		true,
+
+	// 					// @todo: move wrapper names into base ?
+
+	// 					wrapperClass: 		'swiper__wrapper',
+	// 					slideClass: 		'swiper__slide',
+	// 					slideActiveClass: 	'swiper__slide--active',
+	// 					slideVisibleClass: 	'swiper__slide--visible',
+	// 					noSwipingClass: 	'swiper--noSwiping',
+
+	// 				},
+	// 				/**
+	// 				 * set different swiper options
+	// 				 * use values from mbiMq.mq
+	// 				 */
+	// 				states = {
+
+	// 					'palm': {
+	// 						slidesPerView: 1
+	// 					},
+	// 					'lap+': {
+	// 						slidesPerView: 3
+	// 					}
+
+	// 				};
+
+	// 			// @todo: move value check into swiper module ?
+
+	// 			if('loop' in data) {
+	// 				if(data.loop === true) {
+	// 					args.loop = true;
+	// 				}
+	// 			}
+
+	// 			if('autoplay' in data) {
+	// 				if(data.autoplay === true) {
+	// 					args.autoplay = 6000;
+	// 				} else if(data.autoplay === parseInt(data.autoplay, 10)) { // if is integer
+	// 					args.autoplay = data.autoplay;
+	// 				}
+	// 			}
+
+	// 			if('initCounter' in data) {
+	// 				args.initCounter = data.initCounter;
+	// 				args.loop = false; // counter + loop does not work (yet)
+	// 			}
+
+	// 			if('initButtons' in data) {
+	// 				args.initButtons = data.initButtons;
+	// 			}
+
+	// 			if('initPagination' in data) {
+	// 				args.initPagination = data.initPagination;
+	// 			}
+
+	// 			// INIT SWIPER WITH ARGUMENTS
+	// 			var options = { base: args };
+	// 			if(!_.exists($(this).parents('.modal'))) { // e.g. if within modal omit states
+	// 				options.states = states;
+	// 			}
+
+	// 			mbiSwiper.createSwiper(id, options);
+
+	// 		});
+
+	// 	});
+	// }
 
 	// ------------------------------------------------------------------------
 	// DEPRECATED BROWSER MESSAGE
@@ -140,5 +198,12 @@ require([
 		alert('This page will not work on this browser ('+mbiConfig.browser.browserName+' '+mbiConfig.browser.browserVersion+') because someone did not think about graceful degradation or progressive enhancement!');
 
 	}
+
+	$(document).ready(function(){
+		checkLogin();
+		openPortalInfo();
+		// setBodyAttr();
+	});
+
 
 });

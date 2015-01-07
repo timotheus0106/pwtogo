@@ -9199,19 +9199,41 @@ return jQuery;
 define('project/MbiConfig',[], function() {
 
 var config = {
-	"mediaQueries" : {
-
-		"palm": 			[ "0px", 		"419px" 	],
-		"lap": 				[ "420px", 		"767px" 	],
-		"portrait":			[ "768px", 		"1023px" 	],
-		"landscape":		[ "1024px", 	"1199px" 	],
-		"desk": 			[ "1200px", 	"1439px" 	],
-		"wide": 			[ "1440px", 	"1919px" 	],
-		"cinema": 			[ "1920px", 	"9999px" 	]
-
+	"mediaQueries": {
+		"palm": [
+			"0px",
+			"419px"
+		],
+		"lap": [
+			"420px",
+			"767px"
+		],
+		"portrait": [
+			"768px",
+			"1023px"
+		],
+		"landscape": [
+			"1024px",
+			"1199px"
+		],
+		"desk": [
+			"1200px",
+			"1439px"
+		],
+		"wide": [
+			"1440px",
+			"1919px"
+		],
+		"cinema": [
+			"1920px",
+			"9999px"
+		]
 	},
-	"debug" : true
-};
+	"debug": true,
+	"build": "2015-1-6 15-47",
+	"version": 4
+}
+;
 config.modules = { MbiConfig : true };
 return config;
 
@@ -10143,6 +10165,26 @@ define('base/MbiHelper',[
 			}
 
 		},
+		ajax: function(action, ajaxData, responseFunction) {
+
+            ajaxData.action = action;
+
+            $.ajax({
+
+                type: 'POST',
+                data: ajaxData
+
+            }).done(function(response) {
+
+                responseFunction(response);
+
+            }).fail(function(xhr, ajaxOptions, thrownError) {
+
+                alert(thrownError);
+
+            });
+
+        },
 		/**
 		 * EXAMPLES:
 		 *
@@ -10225,6 +10267,38 @@ $.extend( $.easing, {
 	easeOutExpo: function (x, t, b, c, d) {
 		return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
 	}
+});
+define('project/Helper',[
+    'jquery',
+], function(
+    $
+) {
+    
+
+    var module = {
+
+        ajax: function(action, ajaxData, responseFunction) {
+
+            ajaxData.action = action;
+
+            $.ajax({
+
+                type: 'POST',
+                data: ajaxData
+
+            }).done(function(response) {
+
+                responseFunction(response);
+
+            }).fail(function(xhr, ajaxOptions, thrownError) {
+
+                alert(thrownError);
+
+            });
+
+        }
+    };
+    return module;
 });
 define('base/MbiBrowser',[
 	'jquery',
@@ -13951,334 +14025,27 @@ require([
 });
 define("base/MbiBackgroundImage", function(){});
 
-define('project/Video',[
-	'jquery',
-	'project/MbiConfig',
-	'base/MbiMediaQuery',
-	'base/MbiHelper',
-], function(
-	$,
-	mbiConfig,
-	mbiMq,
-	_
-) {
-	
-
-	// ---------------------------------------------------------------
-	// VIDEO HANDLER
-	// ---------------------------------------------------------------
-	if(Modernizr.video) {
-
-		// if(mbiConfig.browser.android !== false && parseFloat(mbiConfig.browser.android) < 4.3) {
-		// 	$('html').addClass('android-video');
-		// }
-
-		if(mbiConfig.browser.android == false || parseFloat(mbiConfig.browser.android) >= 4.3) {
-
-			$(document).on('click', '.js_video', function() {
-
-				var	$button = $(this),
-					toggleTarget = $button.attr('data-toggleTarget'),
-					target = $button.attr('data-videoTarget'),
-					video = $(target).get(0),
-
-					endVideo = function() {
-
-						$button.addClass('is_locked');
-						$button.removeClass('js_videoStop');
-
-						video.pause();
-
-						var attr = $button.attr('data-textStart');
-						$button.text(attr);
-
-						$(toggleTarget).removeClass('is_active');
-
-						$button.addClass('js_videoPlay');
-						$button.removeClass('is_locked');
-
-					},
-					playVideo = function() {
-
-						$(target).off('loadstart');
-
-						$button.removeClass('js_videoPlay');
-
-						video.play();
-
-						var attr = $button.attr('data-textPause');
-						$button.text(attr);
-
-						$(target).off('canplay');
-
-						$(toggleTarget).addClass('is_active');
-
-						$button.addClass('js_videoStop');
-						$button.removeClass('is_locked');
-
-					};
-
-				if($button.hasClass('js_videoPlay')) {
-
-					if(!$button.hasClass('is_locked')) {
-
-						$button.addClass('is_locked');
-						$button.removeClass('js_videoPlay');
-
-						video.paused ? video.play() : video.load();
-
-					}
-
-					$(target).on('loadstart', function() {
-
-						var attr = $button.attr('data-textLoading');
-						$button.text(attr);
-
-					});
-
-					$(target).on('ended', function() {
-						$button.trigger('click');
-					});
-
-					$(target).on('canplay', function() {
-						playVideo();
-					});
-
-					$(target).on('play', function() {
-						playVideo();
-					});
-
-				} else if($button.hasClass('js_videoStop')) {
-
-					if(!$button.hasClass('is_locked')) {
-
-						endVideo();
-
-					}
-
-				}
-
-			});
-
-		}
-
-	}
-
-});
-define('project/HoverHandler',[
-	'jquery',
-	'project/MbiConfig',
-], function(
-	$,
-	mbiConfig
-) {
-	
-
-	// ---------------------------------------------------------------
-	// HOVER-ON-MOUSE/TAP-ON-TOUCH HANDLER
-	// ---------------------------------------------------------------
-
-	if(Modernizr.touch || $('html').hasClass('ios')) {
-
-		$(document).on('click', '.js_hover', function() {
-
-			if(!$(this).hasClass('is_locked')) {
-
-				if(!$(this).hasClass('is_active')) {
-
-					$('.js_hover').removeClass('is_active');
-					$(this).addClass('is_active');
-
-				}
-
-			}
-
-		});
-
-	} else {
-
-		$(document).on('mouseenter', '.js_hover', function() {
-
-			if(!$(this).hasClass('is_locked')) {
-
-				$(this).addClass('is_active');
-
-			}
-
-		});
-		$(document).on('mouseleave', '.js_hover', function() {
-
-			if(!$(this).hasClass('is_locked')) {
-
-				$(this).removeClass('is_active');
-
-			}
-
-		});
-
-	}
-
-	mbiConfig.modules.HoverHandler = true;
-
-});
-define('project/ToggleHandler',[
-	'jquery',
-	'project/MbiConfig',
-], function(
-	$,
-	mbiConfig
-) {
-	
-
-	// ---------------------------------------------------------------
-	// TOGGLE HANDLER
-	// ---------------------------------------------------------------
-	$(document).on('click', '.js_toggle', function() {
-
-		var toggleTarget,
-			toggleClass,
-			toggleButtonClass = 'is_active',
-			$this = $(this);
-
-		if(!$this.hasClass('is_locked')) {
-
-			// toggle class (for button)
-			if(!!$this.attr('data-toggleClass')) {
-				toggleClass = $this.attr('data-toggleClass');
-			} else {
-				toggleClass = 'is_active';
-			}
-
-			// toggle target (menu, popup, etc.)
-			if(!!$this.attr('data-toggleTarget')) {
-				toggleTarget = $(this).attr('data-toggleTarget');
-			} else {
-				toggleTarget = '.js_toggle';
-			}
-
-			var $toggleTarget = $(toggleTarget),
-				toggleState = $toggleTarget.hasClass(toggleClass),
-				$toggleButtons = $('[data-toggleTarget='+toggleTarget+'][data-toggleClass='+toggleClass+']');
-
-			// toggle text (for button(s))
-			$toggleButtons.each(function(i, value) {
-
-				if($(this).attr('data-toggleText')) {
-
-					var attr = $(this).attr('data-toggleText');
-					var text = $(this).text();
-
-					$(this).attr('data-toggleText', text);
-					$(this).text(attr);
-
-				}
-
-			});
-
-			// toggle button-set and target (on/off)
-			if(toggleState) {
-				$toggleTarget.removeClass(toggleClass);
-				$toggleButtons.removeClass(toggleButtonClass);
-			} else {
-				$toggleTarget.addClass(toggleClass);
-				$toggleButtons.addClass(toggleButtonClass);
-			}
-
-		}
-
-	});
-
-mbiConfig.modules.ToggleHandler = true;
-
-});
-define('project/MenuToggleHandler',[
-	'jquery',
-	'project/MbiConfig',
-], function(
-	$,
-	mbiConfig
-) {
-	
-
-	// ---------------------------------------------------------------
-	// MENU TOGGLE HANDLER
-	//
-	// simple toggles a menu, using one or more buttons.
-	// the buttons also receive an active class and are connected to the navigation state.
-	// a click outside the navigation also closes it.
-	// ---------------------------------------------------------------
-
-	var $body = $('body'),
-		buttonsClass = '.js_toggleNavigation',
-		$buttons = $(buttonsClass),
-
-		navigationSelector = '.navigation',
-		menuClass = 'has_navigation--open',
-		buttonActiveClass = 'is_active',
-
-		navClicker = function(e) {
-
-			if($(e.target).closest(navigationSelector).length === 0 ) { // "it's magic"
-
-				$body.removeClass(menuClass);
-				$buttons.removeClass(buttonActiveClass);
-				$(document).off('click', navClicker); // remove click handler when clicked once
-
-			}
-
-		};
-
-	$(document).on('click', buttonsClass, function() {
-
-		var $this = $(this);
-
-		if(!$this.hasClass('is_locked')) {
-
-			$buttons.addClass('is_locked');
-
-			if($body.hasClass(menuClass)) { // if nav open
-
-				$body.removeClass(menuClass); // close nav
-				$buttons.removeClass(buttonActiveClass);
-				$(document).off('click', navClicker); // remove click outside nav to close
-
-			} else { // if nav closed
-
-				$body.addClass(menuClass); // open nav
-				$buttons.addClass(buttonActiveClass);
-				$(document).on('click', navClicker); // add click outside nav to close
-
-			}
-
-			$buttons.removeClass('is_locked');
-
-		}
-
-	});
-
-	mbiConfig.modules.MenuToggleHandler = true;
-
-});
 require([
 	'jquery',
 	'project/MbiConfig',
 	'base/MbiMediaQuery',
 	'base/MbiHelper',
 
+	'project/Helper',
 	'base/footer',
 	'base/MbiModal',
 	'base/MbiImageSize',
-	'base/MbiBackgroundImage',
+	'base/MbiBackgroundImage'
 
-	'project/Video',
-	'project/HoverHandler',
-	'project/ToggleHandler',
-	'project/MenuToggleHandler'
+	// 'project/HoverHandler',
+	// 'project/ToggleHandler',
+	// 'project/MenuToggleHandler'
 ], function(
 	$,
 	mbiConfig,
 	mbiMq,
-	_
+	_,
+	Ajaxx
 ) {
 	
 
@@ -14294,87 +14061,144 @@ require([
 	}
 
 	// ----------------------------------------------------------------
-	// SWIPER SETUP
+	// CHECK LOGIN
 	// ----------------------------------------------------------------
-	if(_.exists('.swiper')) {
-		require(['base/MbiSwiper'], function(mbiSwiper) {
+	var userId = '';
 
-			$('.swiper').each(function() {
+	function checkLogin(){
 
-				var id = $(this).attr('id'), // create swiper with id assigned to container
-					data = $('#'+id).data(),
+		$('#checkLogin').submit(function(e){
+			e.preventDefault();
 
-					args = {
+			var form = $("#checkLogin").serializeArray();
+			$('.errorMsg').remove();
 
-						roundLengths: 		true,
-						resizeFix: 			true,
-						grabCursor: 		true,
+			_.ajax('checklogin', {
 
-						// @todo: move wrapper names into base ?
+		        form: form
 
-						wrapperClass: 		'swiper__wrapper',
-						slideClass: 		'swiper__slide',
-						slideActiveClass: 	'swiper__slide--active',
-						slideVisibleClass: 	'swiper__slide--visible',
-						noSwipingClass: 	'swiper--noSwiping',
+		    }, function(data) {
 
-					},
-					/**
-					 * set different swiper options
-					 * use values from mbiMq.mq
-					 */
-					states = {
+		        if(data.success === true) {
+		            location.href = data.pageUrl;
+		        } else {
+		            $('.submit').prepend(data.content);
 
-						'palm': {
-							slidesPerView: 1
-						},
-						'lap+': {
-							slidesPerView: 3
-						}
+		            $('.errorMsg').fadeOut(4000, function() {
+			            $('.errorMsg').remove();
+			        });
+		        }
+		    });    
+		});
+	}
 
-					};
+	// ----------------------------------------------------------------
+	// OPEN PORTAL CLICK
+	// ----------------------------------------------------------------
 
-				// @todo: move value check into swiper module ?
+	function openPortalInfo(){
+		$('.portal--item').click(function(){
 
-				if('loop' in data) {
-					if(data.loop === true) {
-						args.loop = true;
-					}
-				}
+			if ($(this).hasClass('open')) {
 
-				if('autoplay' in data) {
-					if(data.autoplay === true) {
-						args.autoplay = 6000;
-					} else if(data.autoplay === parseInt(data.autoplay, 10)) { // if is integer
-						args.autoplay = data.autoplay;
-					}
-				}
+				// $(this).css('max-height', piHeight);
+				$(this).removeAttr('style');
+				$(this).removeClass('open');
 
-				if('initCounter' in data) {
-					args.initCounter = data.initCounter;
-					args.loop = false; // counter + loop does not work (yet)
-				}
+			} else {
+				var $poratlInfo = $(this).children('.portalInfos');
+				var piHeight = $poratlInfo.outerHeight() + 50;
 
-				if('initButtons' in data) {
-					args.initButtons = data.initButtons;
-				}
-
-				if('initPagination' in data) {
-					args.initPagination = data.initPagination;
-				}
-
-				// INIT SWIPER WITH ARGUMENTS
-				var options = { base: args };
-				if(!_.exists($(this).parents('.modal'))) { // e.g. if within modal omit states
-					options.states = states;
-				}
-
-				mbiSwiper.createSwiper(id, options);
-
-			});
+				$(this).css('max-height', piHeight);
+				$(this).addClass('open');
+				
+			}
 
 		});
 	}
+
+	// ----------------------------------------------------------------
+	// SWIPER SETUP
+	// ----------------------------------------------------------------
+	// if(_.exists('.swiper')) {
+	// 	require(['base/MbiSwiper'], function(mbiSwiper) {
+
+	// 		$('.swiper').each(function() {
+
+	// 			var id = $(this).attr('id'), // create swiper with id assigned to container
+	// 				data = $('#'+id).data(),
+
+	// 				args = {
+
+	// 					roundLengths: 		true,
+	// 					resizeFix: 			true,
+	// 					grabCursor: 		true,
+
+	// 					// @todo: move wrapper names into base ?
+
+	// 					wrapperClass: 		'swiper__wrapper',
+	// 					slideClass: 		'swiper__slide',
+	// 					slideActiveClass: 	'swiper__slide--active',
+	// 					slideVisibleClass: 	'swiper__slide--visible',
+	// 					noSwipingClass: 	'swiper--noSwiping',
+
+	// 				},
+	// 				/**
+	// 				 * set different swiper options
+	// 				 * use values from mbiMq.mq
+	// 				 */
+	// 				states = {
+
+	// 					'palm': {
+	// 						slidesPerView: 1
+	// 					},
+	// 					'lap+': {
+	// 						slidesPerView: 3
+	// 					}
+
+	// 				};
+
+	// 			// @todo: move value check into swiper module ?
+
+	// 			if('loop' in data) {
+	// 				if(data.loop === true) {
+	// 					args.loop = true;
+	// 				}
+	// 			}
+
+	// 			if('autoplay' in data) {
+	// 				if(data.autoplay === true) {
+	// 					args.autoplay = 6000;
+	// 				} else if(data.autoplay === parseInt(data.autoplay, 10)) { // if is integer
+	// 					args.autoplay = data.autoplay;
+	// 				}
+	// 			}
+
+	// 			if('initCounter' in data) {
+	// 				args.initCounter = data.initCounter;
+	// 				args.loop = false; // counter + loop does not work (yet)
+	// 			}
+
+	// 			if('initButtons' in data) {
+	// 				args.initButtons = data.initButtons;
+	// 			}
+
+	// 			if('initPagination' in data) {
+	// 				args.initPagination = data.initPagination;
+	// 			}
+
+	// 			// INIT SWIPER WITH ARGUMENTS
+	// 			var options = { base: args };
+	// 			if(!_.exists($(this).parents('.modal'))) { // e.g. if within modal omit states
+	// 				options.states = states;
+	// 			}
+
+	// 			mbiSwiper.createSwiper(id, options);
+
+	// 		});
+
+	// 	});
+	// }
 
 	// ------------------------------------------------------------------------
 	// DEPRECATED BROWSER MESSAGE
@@ -14401,6 +14225,13 @@ require([
 		alert('This page will not work on this browser ('+mbiConfig.browser.browserName+' '+mbiConfig.browser.browserVersion+') because someone did not think about graceful degradation or progressive enhancement!');
 
 	}
+
+	$(document).ready(function(){
+		checkLogin();
+		openPortalInfo();
+		// setBodyAttr();
+	});
+
 
 });
 define("Assets/Js/footer.source", function(){});

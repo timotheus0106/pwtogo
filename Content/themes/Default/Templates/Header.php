@@ -9,8 +9,8 @@
 	/**
 	 * This website was carefully designed and built by
 	 *
-	 * Moodley Brand Identity
-	 * http://www.moodley.at/
+	 * Timotheus Triebl
+	 * http://www.timotheus.me
 	 *
 	 */
 	-->
@@ -42,6 +42,7 @@
 	// don't forget to alter msapplication-TileColor
 	// ----------------------------------------------------------------
 	?>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,600,700' rel='stylesheet' type='text/css'>
 	<link rel="shortcut icon" href="<?php echo(WP_HOME); ?>/Assets/FavIcons/favicon.ico" />
 	<link rel="apple-touch-icon" sizes="57x57" href="<?php echo(WP_HOME); ?>/Assets/FavIcons/apple-touch-icon-57x57.png" />
 	<link rel="apple-touch-icon" sizes="114x114" href="<?php echo(WP_HOME); ?>/Assets/FavIcons/apple-touch-icon-114x114.png" />
@@ -83,18 +84,10 @@
 
 		<header>
 
-			<!-- SkipLinks -->
-			<div id="skip-links">
-				<p><a href="#main-menu">Zur Navigation</a></p>
-				<p><a href="#content">Zum Inhalt</a></p>
-			</div>
-
 			<!-- Header -->
 			<div id="header" role="banner">
 				<div class="logo-wrapper">
-					<a href="<?php echo(WP_HOME); ?>">
-						<img src="<?php echo(WP_HOME); ?>/Assets/Images/logo.png" alt="Client Logo" class="logo" />
-					</a>
+					
 				</div>
 			</div>
 

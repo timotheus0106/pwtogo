@@ -6,11 +6,29 @@ if (!isset($_SERVER['CONTEXT']) || (isset($_SERVER['CONTEXT']) && $_SERVER['CONT
 	define('WP_DEBUG', false);
 	define('WP_LOCAL_DEV', false);
 
-	define('WP_HOME',        'http://' . $_SERVER['SERVER_NAME']);
-	define('WP_SITEURL',     'http://' . $_SERVER['SERVER_NAME'] . '/WordPress');
-	define('WP_CONTENT_URL', 'http://' . $_SERVER['SERVER_NAME'] . '/Content');
-	define('WP_CONTENT_DIR', $_SERVER['DOCUMENT_ROOT'] . '/Content');
+	// define('WP_HOME',        'http://' . $_SERVER['SERVER_NAME']);
+	// define('WP_SITEURL',     'http://' . $_SERVER['SERVER_NAME'] . '/WordPress');
+	// define('WP_CONTENT_URL', 'http://' . $_SERVER['SERVER_NAME'] . '/Content');
+	// define('WP_CONTENT_DIR', $_SERVER['DOCUMENT_ROOT'] . '/Content');
 
+	// define('WP_HOME',        'http://localhost/pwtogo');
+	// define('WP_SITEURL',     'http://localhost/pwtogo/WordPress');
+	// define('WP_CONTENT_URL', 'http://localhost/pwtogo/Content');
+	// define('WP_CONTENT_DIR', 'http://localhost/pwtogo/Content');
+
+	$root = dirname(dirname(__DIR__));
+
+	define('WP_DEBUG', false);
+	define('WP_LOCAL_DEV', true);
+	define('FS_METHOD', 'direct'); //local updates
+
+	$port = isset($_SERVER['SERVER_FIXED_PORT']) ? $_SERVER['SERVER_FIXED_PORT'] : false;
+	$serverName = $port ? $_SERVER['SERVER_NAME'] . ':' . $port : $_SERVER['SERVER_NAME'];
+	$serverUrl = 'http://' . $serverName . '/' . basename($root);
+	define('WP_HOME',        $serverUrl);
+	define('WP_SITEURL',     $serverUrl . '/WordPress');
+	define('WP_CONTENT_URL', $serverUrl . '/Content');
+	define('WP_CONTENT_DIR', $root .  '/Content');
 
 } else if ($_SERVER['CONTEXT'] === 'Development') {
 

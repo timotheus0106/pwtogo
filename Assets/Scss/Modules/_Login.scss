@@ -1,0 +1,37 @@
+.module{
+	// float:left;
+	&.module--login{
+		position: relative;
+		padding:2em;
+		.login__wrapper{
+			width:em(200px);
+			position: relative;
+			margin:0 auto;
+
+			.field{
+				width:100%;
+				float: left;
+				&.user{
+					padding-bottom:em(10px);
+				}
+				&.password{
+					padding-bottom:em(10px);
+				}
+				.title{
+					padding-bottom:em(5px);
+				}
+			}
+
+			input[type=submit]{
+				background-color: orange;
+			}
+
+			.errorMsg{
+				color:red;
+				padding-bottom:em(10px);
+			}
+
+		}
+	}
+}
+

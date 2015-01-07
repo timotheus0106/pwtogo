@@ -440,8 +440,8 @@ Class Image {
 	 * @param array $options
 	 * @return string
 	 */
-	public static function dummyUrl($options = array('width' => 100, 'height' => 100)) {
-		return self::dummyImage($options)['url'];
-	}
+	// public static function dummyUrl($options = array('width' => 100, 'height' => 100)) {
+	// 	return self::dummyImage($options)['url'];
+	// }
 
 }

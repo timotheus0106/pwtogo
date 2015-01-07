@@ -37,3 +37,12 @@ if (!is_admin()) {
 // PROJECT FUNCTIONS
 // ------------------------------------------------------------------------
 
+// function setUserId($userid){
+// 	return $userid;
+// }
+// function getUserId(){
+	
+// }
+
+
+require_once(dirname(WP_CONTENT_DIR) . '/Assets/ajax.php');

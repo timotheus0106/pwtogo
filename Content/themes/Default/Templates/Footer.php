@@ -4,20 +4,6 @@
 		<footer id="footer">
 			<div class="content-wrapper">
 				<?php $menuRenderer->render('Footer'); ?>
-				<div class="social">
-					<h2>Follow<span class="visually-hidden"> us on:</span></h2>
-					<ul id="social">
-						<?php
-						foreach(get_field('social_media', 'options') as $socialMedia) {
-							if ($socialMedia['type'] !== 'Mail') {
-								echo '<li class="' . sanitize_title($socialMedia['type']) .'"><a href="' . $socialMedia['url'] . '"><span>' . $socialMedia['type'] . '</span></a></li>';
-							} else {
-								echo '<li class="' . sanitize_title($socialMedia['type']) .'"><a href="mailto:' . $socialMedia['e-mail'] . '"><span>' . $socialMedia['type'] . '</span></a></li>';
-							}
-						}
-						?>
-					</ul>
-				</div>
 			</div>
 		</footer>
 
