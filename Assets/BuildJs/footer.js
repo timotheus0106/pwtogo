@@ -9230,8 +9230,8 @@ var config = {
 		]
 	},
 	"debug": true,
-	"build": "2015-1-7 10-55",
-	"version": 5
+	"build": "2015-1-8 16-30",
+	"version": 6
 }
 ;
 config.modules = { MbiConfig : true };
@@ -14194,6 +14194,30 @@ require([
 	}
 
 	// ----------------------------------------------------------------
+	// LOGOUT USER
+	// ----------------------------------------------------------------
+
+	function logout(){
+		$('.js_logout').on('click', function(){
+			var something = 'something';
+			_.ajax('logout', {
+
+		        something: something
+
+		    }, function(data) {
+
+		        if(data.success === true) {
+		            // $('.modal.modal__addNewPortal').removeClass('modalOpen');
+		            // location.reload();
+		            location.href = data.gotopage;
+		        } else {
+
+		        }
+		    });
+		});
+	}
+
+	// ----------------------------------------------------------------
 	// DELETE PORTAL
 	// ----------------------------------------------------------------
 
@@ -14379,6 +14403,7 @@ require([
 		copyToClipboard();
 		deleteButton();
 		editButton();
+		logout();
 	});
 
 

@@ -16,8 +16,13 @@
 		border:1px solid black;
 		&.button__addNewPortal{
 			position: absolute;
-			right: 200px;
-			top: 200px;
+			right: em(200px);
+			top: em(200px);
+		}
+		&.button__logout{
+			position: absolute;
+			right: em(10px);
+			top: em(120px);
 		}
 	} 
 	.information--wrapper{

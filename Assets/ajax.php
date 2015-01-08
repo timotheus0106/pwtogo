@@ -245,6 +245,21 @@ function ajaxCall() {
 
            die(json_encode($return));
         }
+
+        if($_POST['action'] == 'logout') {
+            
+            wp_logout();
+
+            $gotoPage = get_page_link(2);
+
+            $return = array(
+                'success' => true,
+                'gotopage' => $gotoPage
+            );
+
+           die(json_encode($return));
+        }
+        // -----------------------------------------------------------------------------------
    }
 }
 add_action('init', 'ajaxCall');

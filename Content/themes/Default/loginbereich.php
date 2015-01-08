@@ -34,6 +34,7 @@ require_once('Templates/Header.php');
 <div class="module module--userSite">
 	<div class="headline">HELLO <?php echo $user->display_name;?></div>
 	<div class="button button__addNewPortal js_newPortal">add new</div>
+	<div class="button button__logout js_logout">logout</div>
 	<div class="information--wrapper">
 		<div class="portal--wrapper">
 			<?php foreach ($user_post as $key => $post):

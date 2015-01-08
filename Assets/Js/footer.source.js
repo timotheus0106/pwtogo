@@ -153,6 +153,30 @@ require([
 	}
 
 	// ----------------------------------------------------------------
+	// LOGOUT USER
+	// ----------------------------------------------------------------
+
+	function logout(){
+		$('.js_logout').on('click', function(){
+			var something = 'something';
+			_.ajax('logout', {
+
+		        something: something
+
+		    }, function(data) {
+
+		        if(data.success === true) {
+		            // $('.modal.modal__addNewPortal').removeClass('modalOpen');
+		            // location.reload();
+		            location.href = data.gotopage;
+		        } else {
+
+		        }
+		    });
+		});
+	}
+
+	// ----------------------------------------------------------------
 	// DELETE PORTAL
 	// ----------------------------------------------------------------
 
@@ -338,6 +362,7 @@ require([
 		copyToClipboard();
 		deleteButton();
 		editButton();
+		logout();
 	});
 
 

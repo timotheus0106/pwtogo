@@ -4504,8 +4504,13 @@ video:focus {
 }
 .button.button__addNewPortal {
   position: absolute;
-  right: 200px;
-  top: 200px;
+  right: 12.5em;
+  top: 12.5em;
+}
+.button.button__logout {
+  position: absolute;
+  right: 0.625em;
+  top: 7.5em;
 }
 
 .portal--wrapper {
