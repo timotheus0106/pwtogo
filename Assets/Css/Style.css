@@ -4262,7 +4262,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2em;
 }
 
-.portalInfos .content {
+.button, .portalInfos .content {
   font-family: "Open Sans", sans-serif;
   font-size: 0.875em;
   font-weight: 100;
@@ -4494,6 +4494,20 @@ video:focus {
   padding: 0.33333em 0 1em 0.33333em;
 }
 
+.button {
+  line-height: 25px;
+  text-align: center;
+  width: 100px;
+  height: 25px;
+  background-color: lightgrey;
+  border: 1px solid black;
+}
+.button.button__addNewPortal {
+  position: absolute;
+  right: 200px;
+  top: 200px;
+}
+
 .portal--wrapper {
   width: 50%;
   left: 50%;
@@ -4522,6 +4536,50 @@ video:focus {
   border-bottom: 0;
 }
 
+.portal__name {
+  margin-bottom: 40px;
+  position: relative;
+  cursor: pointer;
+}
+.portal__name .edit--buttons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s ease-in-out;
+     -moz-transition: opacity 0.2s ease-in-out;
+       -o-transition: opacity 0.2s ease-in-out;
+          transition: opacity 0.2s ease-in-out;
+}
+.portal__name .edit--buttons .button {
+  width: 20px;
+  height: 20px;
+  float: left;
+  border: 0;
+  line-height: 0;
+  margin-right: 5px;
+  margin-top: 15px;
+}
+.portal__name .edit--buttons .button img {
+  width: 100%;
+}
+.portal__name:hover .edit--buttons {
+  opacity: 1;
+}
+
+.portalInfos {
+  position: relative;
+}
+.portalInfos .copy--button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+}
+.portalInfos .copy--button img {
+  width: 100%;
+}
 .portalInfos .title {
   width: 25%;
   float: left;
@@ -4535,6 +4593,48 @@ video:focus {
   border-left: 1px solid #000000;
   text-align: left;
   padding-left: 1.42857em;
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+  background-color: lightgrey;
+}
+.modal .create {
+  margin-bottom: 10px;
+}
+
+.modalOpen {
+  opacity: 0.95;
+  visibility: visible;
+  z-index: 0;
+}
+
+#form__addNewPortal {
+  padding-top: 6.25em;
+}
+
+.modal__buttons {
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+     -moz-transform: translate(-50%, 0);
+      -ms-transform: translate(-50%, 0);
+       -o-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  position: relative;
+}
+.modal__buttons .submit {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.discard {
+  top: 22px;
+  width: 65px;
+  height: 25px;
+  background-color: red;
+  line-height: 25px;
+  margin: 0 auto;
 }
 
 /*# sourceMappingURL=Style.css.map */

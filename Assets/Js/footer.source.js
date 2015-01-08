@@ -8,9 +8,9 @@ require([
 	'base/footer',
 	'base/MbiModal',
 	'base/MbiImageSize',
-	'base/MbiBackgroundImage'
+	'base/MbiBackgroundImage',
 
-	// 'project/HoverHandler',
+	'project/Vendor/zclip-min'
 	// 'project/ToggleHandler',
 	// 'project/MenuToggleHandler'
 ], function(
@@ -18,7 +18,8 @@ require([
 	mbiConfig,
 	mbiMq,
 	_,
-	Ajaxx
+	Ajaxx,
+	zclip
 ) {
 	'use strict';
 
@@ -66,27 +67,157 @@ require([
 	}
 
 	// ----------------------------------------------------------------
+	// ADD NEW PORTAL
+	// ----------------------------------------------------------------
+	
+
+	function addNewPortal(){
+
+		$('#form__addNewPortal').submit(function(e){
+			e.preventDefault();
+
+			var form = $("#form__addNewPortal").serializeArray();
+			// var portalName = $(this).parent().parent().attr('data-portalName');
+			var portalName = $('.modal.modal__addNewPortal').attr('data-edit');
+			// $('.errorMsg').remove();
+			var is_editing = 'false';
+			if ($('.modal.modal__addNewPortal').hasClass('editing')) {
+				is_editing = 'true';
+			}
+
+			_.ajax('addNewPortal', {
+
+		        form: form,
+		        oldPortal: portalName,
+		        is_editing: is_editing
+
+		    }, function(data) {
+
+		        if(data.success === true) {
+		            $('.modal.modal__addNewPortal').removeClass('modalOpen').removeClass('editing');
+		            location.reload();
+		        } else {
+
+		        }
+		    });    
+		});
+	}
+
+
+	// ----------------------------------------------------------------
 	// OPEN PORTAL CLICK
 	// ----------------------------------------------------------------
 
 	function openPortalInfo(){
-		$('.portal--item').click(function(){
+		$('.portal__name').click(function(){
 
-			if ($(this).hasClass('open')) {
+			$('.portal--item').removeClass('open').removeAttr('style');
+
+			if ($(this).parent('.portal--item').hasClass('open')) {
 
 				// $(this).css('max-height', piHeight);
-				$(this).removeAttr('style');
-				$(this).removeClass('open');
+				$(this).parent('.portal--item').removeAttr('style');
+				$(this).parent('.portal--item').removeClass('open');
 
 			} else {
-				var $poratlInfo = $(this).children('.portalInfos');
+				var $poratlInfo = $(this).siblings('.portalInfos');
 				var piHeight = $poratlInfo.outerHeight() + 50;
 
-				$(this).css('max-height', piHeight);
-				$(this).addClass('open');
+				$(this).parent('.portal--item').css('max-height', piHeight);
+				$(this).parent('.portal--item').addClass('open');
 				
 			}
 
+		});
+	}
+
+	// ----------------------------------------------------------------
+	// ADD NEW PORTAL SHOW MODAL
+	// ----------------------------------------------------------------
+
+	function showModal(){
+		$('.js_newPortal').on('click', function(){
+			$('.modal.modal__addNewPortal').addClass('modalOpen');
+		});
+	}
+
+	// ----------------------------------------------------------------
+	// COPY TO CLIPBOARD
+	// ----------------------------------------------------------------
+
+	function copyToClipboard(){
+		// $('.copy--button').zclip({
+		// 	path:'js/ZeroClipboard.swf',
+		// 	copy:$('.contentTest').text()
+		// });
+	}
+
+	// ----------------------------------------------------------------
+	// DELETE PORTAL
+	// ----------------------------------------------------------------
+
+
+	function deleteButton(){
+
+		$('.js_deleteButton').on('click', function(){
+			var portalName = $(this).parent().parent().attr('data-portalName');
+
+			console.log('clicked');
+
+			_.ajax('deletePortal', {
+
+		        portalName: portalName
+
+		    }, function(data) {
+
+		        if(data.success === true) {
+		            $('.modal.modal__addNewPortal').removeClass('modalOpen');
+		            location.reload();
+		        } else {
+
+		        }
+		    });
+
+		});
+	}
+
+	// ----------------------------------------------------------------
+	// EDIT PORTAL
+	// ----------------------------------------------------------------
+
+	function editButton(){
+		$('.js_editButton').on('click', function(){
+			var portalName = $(this).parent().parent().attr('data-portalName');
+
+			_.ajax('editPortal', {
+
+		        portalName: portalName
+
+		    }, function(data) {
+
+		        if(data.success === true) {
+		            var portal = data.portal
+                    var mail = data.mail
+                    var user = data.user
+                    var password = data.password
+                    var addInfo = data.addInfo
+
+		            $('.modal.modal__addNewPortal').addClass('modalOpen').addClass('editing');
+		            $('.modal.modal__addNewPortal').attr('data-edit', portal);
+
+		            $('.c_portal').val(portal);
+		            $('.c_email').val(mail);
+		            $('.c_username').val(user);
+		            $('.c_password').val(password);
+		            $('#c_further').val(addInfo);
+
+
+
+		            // location.reload();
+		        } else {
+
+		        }
+		    });
 		});
 	}
 
@@ -202,7 +333,11 @@ require([
 	$(document).ready(function(){
 		checkLogin();
 		openPortalInfo();
-		// setBodyAttr();
+		showModal();
+		addNewPortal();
+		copyToClipboard();
+		deleteButton();
+		editButton();
 	});
 
 
