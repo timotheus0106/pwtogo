@@ -28,7 +28,7 @@ function ajaxCall() {
 
             wp_set_current_user( $userId);
             wp_set_auth_cookie( $userId );
-            do_action( 'wp_login', $userExists->user_login );
+            do_action( 'wp_login', $userAuth->user_login );
 
             if( is_wp_error($userAuth)) {
                 $content = '<div class="errorMsg">you have entered an invalid username and/or password</div>';

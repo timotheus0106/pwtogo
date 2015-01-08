@@ -38,7 +38,7 @@ require_once('Templates/Header.php');
 	<div class="information--wrapper">
 		<div class="portal--wrapper">
 			<?php foreach ($user_post as $key => $post):
-				$repeaterField = get_field('field_54a8027ac8a7f', $user_post->ID);
+				$repeaterField = get_field('field_54a8027ac8a7f', $post->ID);
 
 				foreach ($repeaterField as $key => $portal) { 
 						$count = $key + 1;
