@@ -24,12 +24,15 @@ Template Name: Loginbereich
 	// 	$repeater = get_field('field_54a8027ac8a7f', $user_post->ID);
 
 	// 	pd($repeater);
-		
+
 	// }
 
 
 require_once('Templates/Header.php');
 ?>
+
+<?php if (is_user_logged_in()): ?>
+
 
 <div class="module module--userSite">
 	<div class="headline">HELLO <?php echo $user->display_name;?></div>
@@ -38,9 +41,9 @@ require_once('Templates/Header.php');
 	<div class="information--wrapper">
 		<div class="portal--wrapper">
 			<?php foreach ($user_post as $key => $post):
-				$repeaterField = get_field('field_54a8027ac8a7f', $user_post->ID);
+				$repeaterField = get_field('field_54a8027ac8a7f', $post->ID);
 
-				foreach ($repeaterField as $key => $portal) { 
+				foreach ($repeaterField as $key => $portal) {
 						$count = $key + 1;
 						echo '<div class="portal--item portal-' . $count . '">';
 				?>
@@ -56,22 +59,22 @@ require_once('Templates/Header.php');
 							</div>
 						</div>
 						<div class="portalInfos cf">
-							<div class="portalInfos__email">
+							<div class="portalinfo--item portalInfos__email">
 								<!-- <div class="copy--button">
 									<img src="<?php // echo home_url(); ?>/Assets/Images/icons/copy_icon.png" alt="copy button" />
 								</div> -->
 								<div class="title">Email: </div>
 								<div class="content"><?php echo $portal['email']; ?></div>
 							</div>
-							<div class="portalInfos__username">
+							<div class="portalinfo--item portalInfos__username">
 								<div class="title">Username: </div>
 								<div class="content"><?php echo $portal['username']; ?></div>
 							</div>
-							<div class="portalInfos__password">
+							<div class="portalinfo--item portalInfos__password">
 								<div class="title">Password: </div>
 								<div class="content"><?php echo $portal['password']; ?></div>
 							</div>
-							<div class="portalInfos__additionalInformation">
+							<div class="portalinfo--item portalInfos__additionalInformation">
 								<div class="title">Further Informations: </div>
 								<div class="content"><?php echo $portal['additional_information']; ?></div>
 							</div>
@@ -86,46 +89,47 @@ require_once('Templates/Header.php');
 		</div>
 	</div>
 </div>
-	<div class="modal modal__addNewPortal">
-		<form action="" id="form__addNewPortal">
-			<div class="create create_portal">
-				<div class="title">Portal</div>
-				<input type="text" name="portal" class="c_portal">
-			</div>
+<div class="modal modal__addNewPortal">
+	<form action="" id="form__addNewPortal">
+		<div class="create create_portal">
+			<div class="title">Portal</div>
+			<input type="text" name="portal" class="c_portal">
+		</div>
 
-			<div class="create create_email">
-				<div class="title">email</div>
-				<input type="text" name="email" class="c_email">
-			</div>
+		<div class="create create_email">
+			<div class="title">email</div>
+			<input type="text" name="email" class="c_email">
+		</div>
 
-			<div class="create create_username">
-				<div class="title">user</div>
-				<input type="text" name="user" class="c_username">
+		<div class="create create_username">
+			<div class="title">user</div>
+			<input type="text" name="user" class="c_username">
+		</div>
+		<div class="create create_password">
+			<div class="title">password</div>
+			<input type="text" name="password" class="c_password">
+		</div>
+		<div class="create create_further">
+			<div class="title">further informations</div>
+			<!-- <input type="textarea" name="further" class="c_further"> -->
+			<textarea name="further" id="c_further" cols="30" rows="10"></textarea>
+		</div>
+		<div class="modal__buttons">
+			<div class="field submit">
+				<input type="submit" value="Submit">
 			</div>
-			<div class="create create_password">
-				<div class="title">password</div>
-				<input type="text" name="password" class="c_password">
+			<div class="field discard">
+				discard
 			</div>
-			<div class="create create_further">
-				<div class="title">further informations</div>
-				<!-- <input type="textarea" name="further" class="c_further"> -->
-				<textarea name="further" id="c_further" cols="30" rows="10"></textarea>
-			</div>
-			<div class="modal__buttons">
-				<div class="field submit">
-					<input type="submit" value="Submit">
-				</div>
-				<div class="field discard">
-					discard
-				</div>
-			</div>
-		</form>
-	</div>
-	
+		</div>
+	</form>
+</div>
+<?php endif; ?>
+
 
 
 <!-- </div> -->
-	
+
 
 <?php
 // $renderer->renderFlexibleContentFields();

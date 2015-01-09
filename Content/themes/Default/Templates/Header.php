@@ -87,7 +87,7 @@
 			<!-- Header -->
 			<div id="header" role="banner">
 				<div class="logo-wrapper">
-					
+
 				</div>
 			</div>
 
@@ -95,11 +95,11 @@
 			<div id="top-nav">
 
 				<!-- MainMenu -->
-				<nav class="menu" id="main-menu" role="navigation">
+				<!-- <nav class="menu" id="main-menu" role="navigation">
 					<div class="menu__content">
-						<?php $menuRenderer->render('Header'); ?>
+						<?php // $menuRenderer->render('Header'); ?>
 					</div>
-				</nav>
+				</nav> -->
 
 			</div>
 

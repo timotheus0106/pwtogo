@@ -9230,8 +9230,8 @@ var config = {
 		]
 	},
 	"debug": true,
-	"build": "2015-1-8 16-30",
-	"version": 6
+	"build": "2015-1-8 17-28",
+	"version": 7
 }
 ;
 config.modules = { MbiConfig : true };
@@ -14103,14 +14103,14 @@ require([
 			            $('.errorMsg').remove();
 			        });
 		        }
-		    });    
+		    });
 		});
 	}
 
 	// ----------------------------------------------------------------
 	// ADD NEW PORTAL
 	// ----------------------------------------------------------------
-	
+
 
 	function addNewPortal(){
 
@@ -14140,7 +14140,7 @@ require([
 		        } else {
 
 		        }
-		    });    
+		    });
 		});
 	}
 
@@ -14157,16 +14157,16 @@ require([
 			if ($(this).parent('.portal--item').hasClass('open')) {
 
 				// $(this).css('max-height', piHeight);
-				$(this).parent('.portal--item').removeAttr('style');
-				$(this).parent('.portal--item').removeClass('open');
+				// $(this).parent('.portal--item').removeAttr('style');
+				// $(this).parent('.portal--item').removeClass('open');
 
 			} else {
 				var $poratlInfo = $(this).siblings('.portalInfos');
-				var piHeight = $poratlInfo.outerHeight() + 50;
+				var piHeight = $poratlInfo.outerHeight();
 
-				$(this).parent('.portal--item').css('max-height', piHeight);
+				$(this).parent('.portal--item').css('max-height', piHeight + 120);
 				$(this).parent('.portal--item').addClass('open');
-				
+
 			}
 
 		});
@@ -14231,7 +14231,7 @@ require([
 
 			_.ajax('deletePortal', {
 
-		        portalName: portalName
+				portalName: portalName
 
 		    }, function(data) {
 

@@ -39,8 +39,8 @@ var config = {
 		]
 	},
 	"debug": true,
-	"build": "2015-1-8 16-30",
-	"version": 6
+	"build": "2015-1-8 17-28",
+	"version": 7
 }
 ;
 config.modules = { MbiConfig : true };

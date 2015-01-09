@@ -2,9 +2,9 @@
 
 		<!-- Footer -->
 		<footer id="footer">
-			<div class="content-wrapper">
-				<?php $menuRenderer->render('Footer'); ?>
-			</div>
+			<!-- <div class="content-wrapper">
+				<?php // $menuRenderer->render('Footer'); ?>
+			</div> -->
 		</footer>
 
 	</div><!-- .site -->

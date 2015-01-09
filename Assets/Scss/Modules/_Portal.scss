@@ -4,6 +4,7 @@
 	.headline{
 		@extend %heading--1;
 		padding:em(20px, 60px) 0 em(60px, 60px) em(20px, 60px);
+		width:80%;
 	}
 	.button{
 		@extend %content--light;
@@ -17,14 +18,15 @@
 		&.button__addNewPortal{
 			position: absolute;
 			right: em(200px);
-			top: em(200px);
+			top: em(120px);
+			@include mq('lap-'){right:em(10px);top:em(50px);}
 		}
 		&.button__logout{
 			position: absolute;
 			right: em(10px);
-			top: em(120px);
+			top: 0.5em;
 		}
-	} 
+	}
 	.information--wrapper{
 
 	}
@@ -33,6 +35,8 @@
 			left:50%;
 			transform:translate(-50%,0);
 			position: relative;
+
+			@include mq('lap-'){width:100%;}
 		}
 			.portal--item{
 				@extend %heading--2;
@@ -83,6 +87,10 @@
 					&:hover .edit--buttons{
 						opacity:1;
 					}
+				}
+				.portalinfo--item{
+					width:100%;
+					float:left;
 				}
 				.portalInfos{
 					// height:auto;

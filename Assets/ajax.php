@@ -5,7 +5,7 @@ function ajaxCall() {
         header('Content-Type: application/json; charset=utf-8'); // no json parse necessary in js
         // -----------------------------------------------------------------------------------
        if($_POST['action'] == 'checklogin') {
-            
+
             $form = $_POST['form'];
             $username = $form[0]['value'];
             $plain_password = $form[1]['value'];
@@ -13,22 +13,22 @@ function ajaxCall() {
             $userAuth = wp_authenticate($username, $plain_password);
 
             // echo '<pre>';
-            // print_r($userAuth);
+            // print_r($form);
             // echo '</pre>';
+            $remember = false;
+            if (!empty($form[2]) || isset($form[2])) {
+                $remember = true;
+            }
 
             $content = 'correct username and password';
             $userExists = true;
-            $userId = $userAuth->ID;
-            $userDisplayName = $userAuth->display_name;
             $gotoPage = get_page_link(16);
 
             // setUserClass($userId);
 
             // wp_set_current_user( $userId, $name );
 
-            wp_set_current_user( $userId);
-            wp_set_auth_cookie( $userId );
-            do_action( 'wp_login', $userExists->user_login );
+
 
             if( is_wp_error($userAuth)) {
                 $content = '<div class="errorMsg">you have entered an invalid username and/or password</div>';
@@ -36,6 +36,13 @@ function ajaxCall() {
             }
 
             if ($userExists === true) {
+                $userId = $userAuth->ID;
+                $userDisplayName = $userAuth->display_name;
+
+                wp_set_current_user( $userId);
+                wp_set_auth_cookie( $userId );
+                do_action( 'wp_login', $userAuth->user_login );
+
                 $return = array(
                     'success' => true,
                     'userid' => $userId,
@@ -57,7 +64,7 @@ function ajaxCall() {
         // -----------------------------------------------------------------------------------
 
         if($_POST['action'] == 'addNewPortal') {
-            
+
             $form = $_POST['form'];
             $portal = $form[0]['value'];
             $email = $form[1]['value'];
@@ -65,7 +72,7 @@ function ajaxCall() {
             $password = $form[3]['value'];
             $further = $form[4]['value'];
 
-            $oldPortal = $_POST['oldPortal'];
+
 
 
             $field_key = 'field_54a8027ac8a7f';
@@ -87,6 +94,9 @@ function ajaxCall() {
 
             foreach ($user_post as $key => $post) {
                 $repeater = get_field($field_key, $post->ID);
+                if (empty($repeater)) {
+                    $repeater = array();
+                }
 
                 if ($is_edit == 'false') {
                     $repeater[] = array(
@@ -97,6 +107,7 @@ function ajaxCall() {
                         "additional_information" => $further
                     );
                 } else {
+                    $oldPortal = $_POST['oldPortal'];
                     foreach ($repeater as $key => $portalItem) {
                         if ($portalItem['portal'] == $oldPortal) {
 
@@ -106,9 +117,9 @@ function ajaxCall() {
                                 "email" => $email,
                                 "username" => $newuser,
                                 "password" => $password,
-                                "additional_information" => $further          
+                                "additional_information" => $further
                             );
-                        }                    
+                        }
                     }
                     $repeater[$editkey] = $newArray;
                 }
@@ -134,7 +145,7 @@ function ajaxCall() {
                 // -----------------------------------------------------------------------------------
 
         if($_POST['action'] == 'deletePortal') {
-            
+
             $field_key = 'field_54a8027ac8a7f';
             $portal = $_POST['portalName'];
 
@@ -157,7 +168,7 @@ function ajaxCall() {
                 foreach ($repeater as $key => $portalItem) {
                     if ($portalItem['portal'] == $portal) {
                         $deleteKey = $key;
-                    }                    
+                    }
                 }
 
                 // echo '<pre>';
@@ -193,7 +204,7 @@ function ajaxCall() {
 // -----------------------------------------------------------------------------------
 
         if($_POST['action'] == 'editPortal') {
-            
+
             $field_key = 'field_54a8027ac8a7f';
             $portal = $_POST['portalName'];
 
@@ -220,7 +231,7 @@ function ajaxCall() {
                         $e_user = $portalItem['username'];
                         $e_password = $portalItem['password'];
                         $e_aI = $portalItem['additional_information'];
-                    }                    
+                    }
                 }
             }
 
@@ -247,7 +258,7 @@ function ajaxCall() {
         }
 
         if($_POST['action'] == 'logout') {
-            
+
             wp_logout();
 
             $gotoPage = get_page_link(2);
